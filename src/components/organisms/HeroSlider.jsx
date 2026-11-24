@@ -78,12 +78,13 @@ export default function HeroSlider() {
         <HeroButton href="#services">Mining capabilities</HeroButton>
       </div>
 
-      <div className="frame" aria-hidden="true">
+      {/* <div className="frame" aria-hidden="true">
         <i className="tl" />
         <i className="tr" />
         <i className="bl" />
         <i className="br" />
-      </div>
+      </div> */}
+  
 
       {/* progress ring dots */}
       <div className="dots" style={{ "--dur": `${SLIDE_MS}ms` }}>

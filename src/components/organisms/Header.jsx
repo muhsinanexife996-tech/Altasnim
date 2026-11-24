@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { navLinks, contactLink, footer } from "../../data/content";
-
-const CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&";
 
 const Cta = ({ onClick }) => (
   <a className="hd-cta" href={contactLink.href} onClick={onClick}>
@@ -20,7 +18,6 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
-  const timers = useRef(new Map());
 
   /* floating glass bar after scrolling */
   useEffect(() => {
@@ -40,34 +37,6 @@ export default function Header() {
     window.addEventListener("resize", f);
     return () => window.removeEventListener("resize", f);
   }, []);
-  useEffect(() => () => timers.current.forEach(clearInterval), []);
-
-  /* decoder scramble: letters settle one by one */
-  const scramble = (e) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const el = e.currentTarget;
-    const letters = [...el.querySelectorAll(".hd-l")];
-    clearInterval(timers.current.get(el));
-    letters.forEach((l) => {
-      if (!l.dataset.o) {
-        l.dataset.o = l.textContent;
-        l.style.width = l.getBoundingClientRect().width + "px"; // no jitter
-      }
-    });
-    const t0 = Date.now();
-    const id = setInterval(() => {
-      const t = Date.now() - t0;
-      let done = true;
-      letters.forEach((l, j) => {
-        if (t < 120 + j * 38) {
-          l.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
-          done = false;
-        } else l.textContent = l.dataset.o;
-      });
-      if (done) clearInterval(id);
-    }, 45);
-    timers.current.set(el, id);
-  };
 
   const go = (i) => { setActive(i); setOpen(false); };
   const num = (i) => String(i + 1).padStart(2, "0");
@@ -76,7 +45,7 @@ export default function Header() {
     <header className={`hd${scrolled ? " sc" : ""}${open ? " open" : ""}`}>
       <div className="hd-bar">
         <a className="hd-logo" href="#home" aria-label="Al Tasnim Gulf Ltd">
-          <img src="/images/logo.png" alt="Al Tasnim Gulf Ltd" />
+          <img src={import.meta.env.BASE_URL + "images/logo.png"} alt="Al Tasnim Gulf Ltd" />
         </a>
 
         {/* desktop: nav pill + contact button */}
@@ -85,15 +54,8 @@ export default function Header() {
             {navLinks.map((l, i) => (
               <a key={l.label} href={l.href} style={{ "--n": i }}
                  className={`hd-lk${active === i ? " act" : ""}`}
-                 onMouseEnter={scramble} onClick={() => go(i)}>
-                {l.label.split(" ").map((w, wi) => (
-                  <span key={wi}>
-                    {wi > 0 && " "}
-                    <span className="hd-wd">
-                      {[...w].map((c, ci) => <span className="hd-l" key={ci}>{c}</span>)}
-                    </span>
-                  </span>
-                ))}
+                 onClick={() => go(i)}>
+                {l.label}
               </a>
             ))}
           </nav>
