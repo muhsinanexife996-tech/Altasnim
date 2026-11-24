@@ -1,0 +1,24 @@
+.saudi { position: relative; padding: 50px 0; margin: 30px 0; }
+.saudi__panel { position: absolute; top: 0; bottom: 0; left: 0; width: 58%; background: var(--beige); border-radius: 0 40px 40px 0; }
+.saudi__grid { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; align-items: center; }
+.saudi h2 { color: var(--orange); font-size: clamp(26px, 3.4vw, 42px); font-weight: 700; text-transform: uppercase; line-height: 1.15; margin-bottom: 18px; }
+.saudi__text p { color: var(--blue); font-size: 14px; max-width: 360px; }
+
+.saudi__years { display: flex; align-items: center; gap: 14px; }
+.saudi__number {
+  font-size: clamp(130px, 20vw, 270px); font-weight: 800; line-height: 0.85; letter-spacing: -6px;
+  background: url("/images/mine-night.jpg") center / cover;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: var(--navy);
+  animation: pan 14s ease-in-out infinite alternate;
+}
+.saudi__number span { -webkit-text-fill-color: var(--blue); font-size: 0.55em; vertical-align: top; letter-spacing: 0; }
+@keyframes pan { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+.saudi__years p { color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: clamp(14px, 1.5vw, 19px); line-height: 1.4; }
+
+@media (max-width: 900px) {
+  .saudi__panel { width: 100%; border-radius: 0 40px 40px 0; }
+  .saudi__grid { grid-template-columns: 1fr; gap: 30px; }
+  .saudi__text p { max-width: none; }
+  .saudi__years { justify-content: center; }
+}

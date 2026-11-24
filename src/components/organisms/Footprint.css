@@ -1,0 +1,11 @@
+.footprint { padding: 30px 0 70px; }
+.footprint h2 { text-align: center; color: var(--orange); text-transform: uppercase; font-size: clamp(16px, 2vw, 20px); font-weight: 600; margin-bottom: 20px; }
+.footprint__bar { display: grid; grid-template-columns: repeat(4, 1fr); border: 1.5px solid var(--blue); border-radius: var(--radius); transition: box-shadow 0.4s; }
+.footprint__bar:hover { box-shadow: var(--shadow-lg); }
+.footprint__bar .counter + .counter { border-left: 1px solid #cdd3e6; }
+
+@media (max-width: 700px) {
+  .footprint__bar { grid-template-columns: repeat(2, 1fr); }
+  .footprint__bar .counter:nth-child(3) { border-left: 0; }
+  .footprint__bar .counter:nth-child(n + 3) { border-top: 1px solid #cdd3e6; }
+}

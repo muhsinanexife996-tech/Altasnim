@@ -1,0 +1,23 @@
+.counter h3 { font-weight: 700; line-height: 1.1; }
+.counter p { text-transform: uppercase; font-weight: 600; color: var(--blue); }
+
+/* Footprint bar style */
+.counter--plain { text-align: center; padding: 22px 12px; }
+.counter--plain h3 { font-size: clamp(34px, 4.5vw, 56px); color: var(--blue); }
+.counter--plain p { font-size: 13px; }
+
+/* Orange boxed style */
+.counter--box {
+  position: relative; padding: 26px 22px 30px; border-radius: var(--radius);
+  border: 1px solid rgba(43, 63, 158, 0.18); background: #fff;
+  transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+}
+.counter--box h3 { font-size: clamp(28px, 3.4vw, 44px); color: var(--orange); }
+.counter--box .counter__suffix { font-size: 0.55em; vertical-align: top; position: relative; top: 0.1em; }
+.counter--box p { font-size: 12px; }
+.counter--box::before, .counter--box::after {
+  content: ""; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--orange);
+}
+.counter--box::before { top: -3px; left: 24px; }
+.counter--box::after { bottom: -3px; left: 50%; }
+.counter--box:hover { transform: translateY(-10px); border-color: var(--orange); box-shadow: var(--shadow-lg); }

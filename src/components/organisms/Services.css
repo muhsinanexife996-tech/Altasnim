@@ -1,0 +1,25 @@
+.services__grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 50px; align-items: center; }
+.services__visual { position: relative; aspect-ratio: 1; max-width: 480px; display: grid; place-items: center; }
+.services__logo {
+  width: 85%; aspect-ratio: 1; background: url("/images/rock-texture.jpg") center / cover;
+  -webkit-mask: url("/images/t-logo.svg") center / contain no-repeat;
+          mask: url("/images/t-logo.svg") center / contain no-repeat;
+  transition: transform 0.6s;
+}
+.services__visual:hover .services__logo { transform: scale(1.06); }
+.ring { position: absolute; border-radius: 50%; border: 1px solid; }
+.ring--orange { inset: 0; border-color: var(--orange); animation: spin 30s linear infinite; }
+.ring--blue { inset: 8%; border-color: var(--blue); animation: spin 22s linear infinite reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.services__list { display: flex; flex-direction: column; gap: 50px; }
+.service-item { display: grid; grid-template-columns: auto 1fr; gap: 14px; transition: transform 0.4s; }
+.service-item:hover { transform: translateX(12px); }
+.service-item__no { font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; color: var(--orange); line-height: 1.2; }
+.service-item h3 { font-size: clamp(26px, 3.2vw, 38px); font-weight: 600; color: var(--blue); line-height: 1.2; margin-bottom: 10px; }
+.service-item p { font-size: 14px; }
+
+@media (max-width: 900px) {
+  .services__grid { grid-template-columns: 1fr; }
+  .services__visual { margin-inline: auto; max-width: 340px; }
+}
