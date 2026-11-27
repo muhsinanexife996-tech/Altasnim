@@ -1,10 +1,111 @@
+// import { useEffect, useState } from "react";
+// import { navLinks, contactLink, footer } from "../../data/content";
+
+// const Cta = ({ onClick }) => (
+//   <a className="hd-cta" href={contactLink.href} onClick={onClick}>
+//     <span className="hd-lbl">{contactLink.label}</span>
+//   </a>
+// );
+
+// const Arrow = () => (
+//   <svg viewBox="0 0 24 24" aria-hidden="true">
+//     <path d="M6 12h12M13 6l6 6-6 6" fill="none" stroke="currentColor"
+//       strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+//   </svg>
+// );
+
+// export default function Header() {
+//   const [scrolled, setScrolled] = useState(false);
+//   const [open, setOpen] = useState(false);
+//   const [active, setActive] = useState(0);
+
+//   /* floating glass bar after scrolling */
+//   useEffect(() => {
+//     const f = () => setScrolled(window.scrollY > 40);
+//     f();
+//     window.addEventListener("scroll", f, { passive: true });
+//     return () => window.removeEventListener("scroll", f);
+//   }, []);
+
+//   /* lock page scroll while mobile menu is open, close it on desktop resize */
+//   useEffect(() => {
+//     document.body.style.overflow = open ? "hidden" : "";
+//     return () => { document.body.style.overflow = ""; };
+//   }, [open]);
+//   useEffect(() => {
+//     const f = () => window.innerWidth > 1000 && setOpen(false);
+//     window.addEventListener("resize", f);
+//     return () => window.removeEventListener("resize", f);
+//   }, []);
+
+//   const go = (i) => { setActive(i); setOpen(false); };
+//   const num = (i) => String(i + 1).padStart(2, "0");
+
+//   return (
+//     <header className={`hd${scrolled ? " sc" : ""}${open ? " open" : ""}`}>
+//       <div className="hd-bar">
+//         <a className="hd-logo" href="#home" aria-label="Al Tasnim Gulf Ltd">
+//           <img src={import.meta.env.BASE_URL + "images/logo.png"} alt="Al Tasnim Gulf Ltd" />
+//         </a>
+
+//         {/* desktop: nav pill + contact button */}
+//         <div className="hd-rt">
+//           <nav className="hd-nav" aria-label="Main">
+//             {navLinks.map((l, i) => (
+//               <a key={l.label} href={l.href} style={{ "--n": i }}
+//                  className={`hd-lk${active === i ? " act" : ""}`}
+//                  onClick={() => go(i)}>
+//                 {l.label}
+//               </a>
+//             ))}
+//           </nav>
+//           <Cta />
+//         </div>
+
+//         <button className="hd-burger" aria-label="Menu" aria-expanded={open}
+//                 onClick={() => setOpen((o) => !o)}>
+//           <span /><span /><span />
+//         </button>
+//       </div>
+
+//       {/* mobile: glass-card menu */}
+//       <div className="hd-mnu">
+//         <ul className="hd-ml">
+//           {navLinks.map((l, i) => (
+//             <li key={l.label}>
+//               <a className={`hd-mi${active === i ? " act" : ""}`} href={l.href}
+//                  style={{ "--n": i }} onClick={() => go(i)}>
+//                 <span className="hd-mn">{num(i)}</span>
+//                 <span className="hd-mt">{l.label}{l.sub && <small>{l.sub}</small>}</span>
+//                 <span className="hd-mr"><Arrow /></span>
+//               </a>
+//             </li>
+//           ))}
+//         </ul>
+//         <div className="hd-mf">
+//           <Cta onClick={() => setOpen(false)} />
+//           {footer?.social && (
+//             <div className="hd-soc">
+//               {footer.social.map((s) => (
+//                 <a key={s.name} href={s.href} aria-label={s.name}
+//                    target="_blank" rel="noreferrer">{s.name.slice(0, 2)}</a>
+//               ))}
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </header>
+//   );
+// }
+
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { navLinks, contactLink, footer } from "../../data/content";
 
 const Cta = ({ onClick }) => (
-  <a className="hd-cta" href={contactLink.href} onClick={onClick}>
+  <Link className="hd-cta" to={contactLink.href} onClick={onClick}>
     <span className="hd-lbl">{contactLink.label}</span>
-  </a>
+  </Link>
 );
 
 const Arrow = () => (
@@ -18,8 +119,9 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
+  const { pathname } = useLocation();
+  const onContact = pathname.startsWith("/contact");
 
-  /* floating glass bar after scrolling */
   useEffect(() => {
     const f = () => setScrolled(window.scrollY > 40);
     f();
@@ -27,7 +129,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", f);
   }, []);
 
-  /* lock page scroll while mobile menu is open, close it on desktop resize */
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -40,23 +141,22 @@ export default function Header() {
 
   const go = (i) => { setActive(i); setOpen(false); };
   const num = (i) => String(i + 1).padStart(2, "0");
+  const isAct = (i) => !onContact && active === i;
 
   return (
     <header className={`hd${scrolled ? " sc" : ""}${open ? " open" : ""}`}>
       <div className="hd-bar">
-        <a className="hd-logo" href="#home" aria-label="Al Tasnim Gulf Ltd">
+        <Link className="hd-logo" to="/#home" aria-label="Al Tasnim Gulf Ltd" onClick={() => setOpen(false)}>
           <img src={import.meta.env.BASE_URL + "images/logo.png"} alt="Al Tasnim Gulf Ltd" />
-        </a>
+        </Link>
 
-        {/* desktop: nav pill + contact button */}
         <div className="hd-rt">
           <nav className="hd-nav" aria-label="Main">
             {navLinks.map((l, i) => (
-              <a key={l.label} href={l.href} style={{ "--n": i }}
-                 className={`hd-lk${active === i ? " act" : ""}`}
-                 onClick={() => go(i)}>
+              <Link key={l.label} to={"/" + l.href} style={{ "--n": i }}
+                    className={`hd-lk${isAct(i) ? " act" : ""}`} onClick={() => go(i)}>
                 {l.label}
-              </a>
+              </Link>
             ))}
           </nav>
           <Cta />
@@ -68,17 +168,16 @@ export default function Header() {
         </button>
       </div>
 
-      {/* mobile: glass-card menu */}
       <div className="hd-mnu">
         <ul className="hd-ml">
           {navLinks.map((l, i) => (
             <li key={l.label}>
-              <a className={`hd-mi${active === i ? " act" : ""}`} href={l.href}
-                 style={{ "--n": i }} onClick={() => go(i)}>
+              <Link className={`hd-mi${isAct(i) ? " act" : ""}`} to={"/" + l.href}
+                    style={{ "--n": i }} onClick={() => go(i)}>
                 <span className="hd-mn">{num(i)}</span>
                 <span className="hd-mt">{l.label}{l.sub && <small>{l.sub}</small>}</span>
                 <span className="hd-mr"><Arrow /></span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

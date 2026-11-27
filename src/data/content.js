@@ -1,27 +1,33 @@
 export const navLinks = [
   { label: "Home", href: "#home", sub: "Welcome" },
   { label: "About Us", href: "#about", sub: "Who we are" },
+  { label: "Services", href: "#services", sub: "What we offer" },
+  { label: "Capabilities", href: "#capabilities", sub: "What we can do" },
   { label: "Projects", href: "#projects", sub: "Our work" },
-  { label: "Mining Operations", href: "#operations", sub: "What we do" },
-  { label: "Management", href: "#management", sub: "Our team" },
+  { label: "Our Portfolio", href: "#portfolio", sub: "Our track record" },
   { label: "News", href: "#news", sub: "Latest updates" },
-  { label: "Media", href: "#media", sub: "Gallery" },
 ];
-export const contactLink = { label: "Contact Us", href: "#contact" };
+export const contactLink = { label: "Contact Us", href: "/contact" };
 
 export const heroSlides = [
-  { ph: "ph-pit",  lines: ["Mineral Exploration &", "Mining Operations", "in Saudi Arabia"] },
-  { ph: "ph-haul", lines: ["Operational Experience", "Backed by the", "Al Tasnim Group"] },
+  {
+    ph: "ph-pit",
+    lines: ["Mineral Exploration &", "Mining Operations", "in Saudi Arabia"],
+  },
+  {
+    ph: "ph-haul",
+    lines: ["Operational Experience", "Backed by the", "Al Tasnim Group"],
+  },
   { ph: "ph-hill", lines: ["Exploring Potential", "Delivering", "Operations"] },
 ];
 
 export const introPics = ["ph-worker", "ph-tyre", "ph-hillgrey"];
 
 export const footprint = [
-  { end: 9,   lines: ["Exploration blocks", "in the portfolio"] },
+  { end: 9, lines: ["Exploration blocks", "in the portfolio"] },
   { end: 770, suffix: "km²", lines: ["Nominal", "block area"] },
-  { end: 4,   lines: ["Round 9", "licences held"] },
-  { end: 5,   lines: ["Round 10", "blocks awarded"] },
+  { end: 4, lines: ["Round 9", "licences held"] },
+  { end: 5, lines: ["Round 10", "blocks awarded"] },
 ];
 
 export const services = [
@@ -46,8 +52,8 @@ export const saudiFocus = {
 
 export const groupStats = [
   { end: 25000, lines: ["People across", "the group"] },
-  { end: 6000,  lines: ["Owned vehicles,", "plant and", "equipment"] },
-  { end: 500,   lines: ["Civil construction", "projects", "delivered"] },
+  { end: 6000, lines: ["Owned vehicles,", "plant and", "equipment"] },
+  { end: 500, lines: ["Civil construction", "projects", "delivered"] },
 ];
 
 export const groupNote =
@@ -111,7 +117,7 @@ export const footer = {
       links: [
         { label: "News", href: "#news" },
         { label: "Media centre", href: "#news" },
-        { label: "Contact us", href: "#contact" },
+        { label: "Contact us", href: "/contact" },
       ],
     },
   ],
@@ -122,4 +128,68 @@ export const footer = {
     { name: "YouTube", href: "#", icon: "youtube" },
   ],
   copy: "© 2026 Al Tasnim Gulf Ltd. All rights reserved.",
+};
+
+// export const contactLink = { label: "Contact Us", href: "/contact" };
+
+export const contactPage = {
+  banner: { lines: ["Tell us about", "your operation."] },
+  intro: "Get in touch with us",
+
+  company: {
+    name: "Al Tasnim Gulf Ltd.",
+    photo: "images/contact-office.jpg",
+    items: [
+      { icon: "pin", lines: ["Sheikh Hassan bin Hussein bin Ali,", "Al Yarmouk, Riyadh,"] },
+      { icon: "mail", lines: ["mining@altasnimgulf.com.sa"], href: "mailto:mining@altasnimgulf.com.sa" },
+      { icon: "web", lines: ["www.altasnimgulf.com.sa"], href: "https://www.altasnimgulf.com.sa" },
+      { icon: "tel", lines: [{ t: "+966 0000 0000", href: "tel:+9660000000000", b: true }] },
+    ],
+  },
+
+  hq: {
+    name: "Al Tasnim Group",
+    sub: "Head Office",
+    items: [
+      { icon: "pin", lines: ["P.O. Box 103, Muscat,", "Postal Code 113,", "Sultanate of Oman"] },
+      {
+        icon: "tel",
+        lines: [
+          { pre: "Telephone: ", t: "+968 2421 4000", href: "tel:+96824214000" },
+          { t: "+968 2421 4810", href: "tel:+96824214810" },
+        ],
+      },
+      { icon: "mail", lines: ["info@altasnim.com"], href: "mailto:info@altasnim.com" },
+      { icon: "web", lines: ["www.altasnim.com"], href: "https://www.altasnim.com" },
+    ],
+  },
+
+  form: {
+    title: "Send an Enquiry",
+    note: "*fields marked are required",
+    submit: "Submit",
+    sent: "Thank you ✓",
+    error: "Please try again",
+    fields: [
+      { name: "name", label: "Name", type: "text", required: true },
+      { name: "company", label: "Company", type: "text", required: true },
+      { name: "email", label: "E-mail", type: "email", required: true },
+      { name: "phone", label: "Phone", type: "tel" },
+      { name: "type", label: "Enquiry type", type: "select",
+        options: ["Mining contract", "Partnership", "Supplier registration", "Careers", "Media & press"] },
+      { name: "subject", label: "Subject", type: "text", required: true },
+      { name: "message", label: "Your enquiry", type: "textarea", full: true },
+    ],
+  },
+
+  help: {
+    title: "What we can help with",
+    items: [
+      "Mining contract at an operating or planned mine",
+      "Partnerships and opportunities on ground you hold",
+      "Supplier and subcontractor registration",
+      "Careers with the Saudi organisation",
+      "Media, press and general enquiries",
+    ],
+  },
 };
